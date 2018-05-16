@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">GroupFinder</string>
     <string name="action_settings">Settings</string>
+
+    <string name="find_restaurant">Click Here</string>
+    <string name="zip_code">Enter Zip Code</string>
+    <string name="nearby">Here are all the restaurants near: </string>
 </resources>
