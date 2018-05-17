@@ -7,28 +7,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MainActivity extends AppCompatActivity {
 
-    Button restaurantsButton;
+    @BindView(R.id.locationEditText) EditText enteredText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        final EditText enteredText = findViewById(R.id.locationEditText);
-
-        restaurantsButton = findViewById(R.id.restaurantbutton);
-        restaurantsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String location = enteredText.getText().toString();
-                Intent intent = new Intent(MainActivity.this, RestaurantsActivity.class);
-                intent.putExtra("location", location);
-                startActivity(intent);
-                //Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show();
-            }
-        });
+        ButterKnife.bind(this);
     }
 
+    @OnClick(R.id.restaurantbutton)
+    public void onClick(View view) {
+        String location = enteredText.getText().toString();
+        Intent intent = new Intent(MainActivity.this, RestaurantsActivity.class);
+        intent.putExtra("location", location);
+        startActivity(intent);
+    }
 }
