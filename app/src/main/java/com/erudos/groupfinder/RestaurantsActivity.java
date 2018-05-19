@@ -3,16 +3,28 @@ package com.erudos.groupfinder;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+
 
 public class RestaurantsActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
+    @BindView(R.id.recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.locationTextView) TextView restaurantsView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager recyclerViewManager;
+    private ArrayList<Restaurant> restaurants = new ArrayList<>();
 
 
 
@@ -21,29 +33,64 @@ public class RestaurantsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurants);
         Intent intent = getIntent();
-        String location = intent.getStringExtra("location");
+        ButterKnife.bind(this);
 
-        recyclerView = findViewById(R.id.recycler_view);
+        String location = intent.getStringExtra("location");
         recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
         recyclerViewManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(recyclerViewManager);
-
-        TextView restaurantsView = findViewById(R.id.locationTextView);
         String tempString = restaurantsView.getText().toString();
         restaurantsView.setText(tempString + location);
-        //restaurantsView.setVisibility(View.INVISIBLE);
-
-        String[] myDataset = new String[]{"oval","unwieldy","north","frequent","hammer",
-                "disgusted","cook","simplistic","mature","frantic","spotless","grotesque",
-                "yummy","knot","voice","tenuous","fire","prick","stream","plucky","languid",
-                "graceful","sparkle","zippy","rude","parched","unusual","request","sloppy",
-                "turn","trite","five","axiomatic","purpose","silent","erect","obey",
-                "interesting","fine","fear","quarter","faithful","house",
-                "ski","horses","mice","army","jelly","fairies","hissing"};
-
-        adapter = new RestaurantAdapter(myDataset);
-        recyclerView.setAdapter(adapter);
+        getRestaurants(location);
     }
+
+
+    private String[] restaurantString(ArrayList<Restaurant> restaurantList){
+        String[] restData = new String[restaurantList.size()];
+        int i = 0;
+        for( Restaurant restaurant: restaurantList){
+            String restString = restaurant.getName() + "\n" +
+                    restaurant.getAddress() + "\n" +
+                    restaurant.getPhone();
+            restData[i++] = restString;
+        }
+        return restData;
+    }
+
+
+    private void getRestaurants(String location) {
+
+        final YelpService yelpService = new YelpService();
+        yelpService.findRestaurants(location, new Callback() {
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                restaurants = yelpService.processResults(response);
+                final String[] myDataset = restaurantString(restaurants);
+
+                RestaurantsActivity.this.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        adapter = new RestaurantAdapter(myDataset);
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.addItemDecoration(
+                                new DividerItemDecoration(
+                                        recyclerView.getContext(),
+                                        DividerItemDecoration.VERTICAL));
+                    }
+                });
+            }
+        });
+    }
+
+
 }
