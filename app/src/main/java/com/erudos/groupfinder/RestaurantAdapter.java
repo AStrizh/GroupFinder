@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 
@@ -38,6 +40,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             restaurantNameText.setText(restaurant.getName());
             restaurantAdressText.setText(restaurant.getAddress().toString());
             restaurantPhoneText.setText(restaurant.getPhone());
+            Picasso.with(itemView.getContext()).load(restaurant.getImageUrl()).into(restaurantPicture);
         }
     }
 
