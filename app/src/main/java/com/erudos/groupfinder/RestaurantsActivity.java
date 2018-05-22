@@ -74,13 +74,13 @@ public class RestaurantsActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
 
                 restaurants = yelpService.processResults(response);
-                final String[] myDataset = restaurantString(restaurants);
+                //final String[] myDataset = restaurantString(restaurants);
 
                 RestaurantsActivity.this.runOnUiThread(new Runnable() {
 
                     @Override
                     public void run() {
-                        adapter = new RestaurantAdapter(myDataset);
+                        adapter = new RestaurantAdapter(restaurants);
                         recyclerView.setAdapter(adapter);
                         recyclerView.addItemDecoration(
                                 new DividerItemDecoration(
