@@ -1,5 +1,6 @@
 package com.erudos.groupfinder;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,7 +26,7 @@ public class RestaurantsActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager recyclerViewManager;
     private ArrayList<Restaurant> restaurants = new ArrayList<>();
-
+    private Context activityContext = this;
 
 
     @Override
@@ -36,6 +37,7 @@ public class RestaurantsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         String location = intent.getStringExtra("location");
+
         recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
@@ -80,12 +82,13 @@ public class RestaurantsActivity extends AppCompatActivity {
 
                     @Override
                     public void run() {
-                        adapter = new RestaurantAdapter(restaurants);
+                        adapter = new RestaurantAdapter(restaurants, activityContext);
                         recyclerView.setAdapter(adapter);
                         recyclerView.addItemDecoration(
                                 new DividerItemDecoration(
                                         recyclerView.getContext(),
                                         DividerItemDecoration.VERTICAL));
+
                     }
                 });
             }
