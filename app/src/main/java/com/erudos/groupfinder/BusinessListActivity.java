@@ -1,6 +1,5 @@
 package com.erudos.groupfinder;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,8 +10,6 @@ import android.util.Log;
 import android.widget.TextView;
 
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,7 +18,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 
-public class RestaurantsActivity extends AppCompatActivity {
+public class BusinessListActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
     @BindView(R.id.locationTextView) TextView restaurantsView;
@@ -65,11 +62,11 @@ public class RestaurantsActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) {
 
                 restaurants = YelpService.processResults(response);
-                RestaurantsActivity.this.runOnUiThread(new Runnable() {
+                BusinessListActivity.this.runOnUiThread(new Runnable() {
 
                     @Override
                     public void run() {
-                        adapter = new RestaurantAdapter(restaurants);
+                        adapter = new BusinessListAdapter(restaurants);
                         recyclerView.setAdapter(adapter);
                         recyclerView.addItemDecoration(
                                 new DividerItemDecoration(

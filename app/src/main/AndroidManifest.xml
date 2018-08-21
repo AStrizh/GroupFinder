@@ -23,7 +23,7 @@
         </activity>
 
         <activity
-            android:name=".RestaurantsActivity"
+            android:name=".BusinessListActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
             <meta-data

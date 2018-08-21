@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import static android.app.Activity.RESULT_OK;
 
 
-public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
+public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapter.ViewHolder> {
 
     private YelpSearchResponse restaurants;
 
@@ -71,21 +71,21 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
                     Intent resultIntent = new Intent();
                     resultIntent.putStringArrayListExtra("result",result);
-                    ((RestaurantsActivity)itemView.getContext()).setResult(RESULT_OK,resultIntent);
+                    ((BusinessListActivity)itemView.getContext()).setResult(RESULT_OK,resultIntent);
 
                 }
             });
         }
     }
 
-    RestaurantAdapter(YelpSearchResponse restaurants) {
+    BusinessListAdapter(YelpSearchResponse restaurants) {
         this.restaurants = restaurants;
     }
 
 
     // Create new views (invoked by the layout manager)
     @Override
-    public RestaurantAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BusinessListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         Context context = parent.getContext();
         int layoutIdForListItem = R.layout.restaurant_items;

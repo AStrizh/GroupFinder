@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         String location = zipText.getText().toString();
         String searchTerm = searchText.getText().toString();
 
-        Intent intent = new Intent(MainActivity.this, RestaurantsActivity.class);
+        Intent intent = new Intent(MainActivity.this, BusinessListActivity.class);
         intent.putExtra("location", location);
         intent.putExtra("searchTerm", searchTerm);
 
