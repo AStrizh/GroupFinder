@@ -4,7 +4,8 @@
 
     <string name="find_restaurant">Click Here</string>
     <string name="zip_code">Enter Zip Code</string>
-    <string name="nearby">Here are all the restaurants near:\u0020</string>
+    <string name="search_term">Enter Search Term</string>
+    <string name="nearby">Here are all the businesses near:\u0020</string>
     <string name="total">Total Results:\u0020</string>
-    <string name="find">Find restaurants in your area</string>
+    <string name="find">Find businesses in your area</string>
 </resources>

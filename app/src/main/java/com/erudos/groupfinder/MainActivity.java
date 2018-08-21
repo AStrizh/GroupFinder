@@ -20,8 +20,9 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    static final int PICK_RESTAURANT = 1;
-    @BindView(R.id.locationEditText) EditText enteredText;
+    static final int PICK_BUSINESS = 1;
+    @BindView(R.id.locationEditText) EditText zipText;
+    @BindView(R.id.searchTermEditText) EditText searchText;
     @BindView(R.id.resultLayout) LinearLayout resultLayout;
     @BindView(R.id.resultNameTextView) TextView nameView;
     @BindView(R.id.resultAdressView) TextView addressView;
@@ -37,19 +38,22 @@ public class MainActivity extends AppCompatActivity {
         resultLayout.setVisibility(View.INVISIBLE);
     }
 
-    @OnClick(R.id.restaurantbutton)
+    @OnClick(R.id.startSearchButton)
     public void onClick(View view) {
-        String location = enteredText.getText().toString();
+        String location = zipText.getText().toString();
+        String searchTerm = searchText.getText().toString();
+
         Intent intent = new Intent(MainActivity.this, RestaurantsActivity.class);
         intent.putExtra("location", location);
+        intent.putExtra("searchTerm", searchTerm);
 
-        startActivityForResult(intent,PICK_RESTAURANT);
+        startActivityForResult(intent, PICK_BUSINESS);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         String name = "No Name";
-        if (requestCode == PICK_RESTAURANT) {
+        if (requestCode == PICK_BUSINESS) {
             if (resultCode == RESULT_OK) {
 
                 ArrayList<String> results = data.getStringArrayListExtra("result");

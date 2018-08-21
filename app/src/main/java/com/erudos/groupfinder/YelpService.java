@@ -1,12 +1,12 @@
 package com.erudos.groupfinder;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import okhttp3.Call;
@@ -18,12 +18,15 @@ import okhttp3.Response;
 
 public class YelpService {
 
-    static void findRestaurants(String location, Callback callback) {
+    static void findRestaurants(String searchTerm, String location, Callback callback) {
 
         OkHttpClient client = new OkHttpClient.Builder().build();
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.YELP_BASE_URL).newBuilder();
-        urlBuilder.addQueryParameter(Constants.YELP_LOCATION_QUERY_PARAMETER, location);
+        urlBuilder.addQueryParameter(Constants.LOCATION_QUERY_PARAMETER, location);
+        urlBuilder.addQueryParameter(Constants.TERM_QUERY_PARAMETER, urlEncoder(searchTerm));
+        urlBuilder.addQueryParameter(Constants.LIMIT_QUERY_PARAMETER, "50");
+
         String url = urlBuilder.build().toString();
 
         Request request= new Request.Builder()
@@ -42,8 +45,9 @@ public class YelpService {
 
         try {
 
-            ArrayList<Restaurant> restaurants = new ArrayList<>();
+            ArrayList<Business> businesses = new ArrayList<>();
             String jsonData = response.body().string();
+
             JSONObject yelpJSON = new JSONObject(jsonData);
 
             int total = yelpJSON.getInt("total");
@@ -77,12 +81,12 @@ public class YelpService {
                 for (int y = 0; y < categoriesJSON.length(); y++) {
                     categories.add(categoriesJSON.getJSONObject(y).getString("title"));
                 }
-                Restaurant restaurant = new Restaurant(name, phone, website, rating,
+                Business business = new Business(name, phone, website, rating,
                         imageUrl, address, latitude, longitude, categories);
-                restaurants.add(restaurant);
+                businesses.add(business);
             }
 
-            searchResponse = new YelpSearchResponse(total,restaurants);
+            searchResponse = new YelpSearchResponse(total, businesses);
 
         }
         catch (IOException | JSONException e){
@@ -90,5 +94,15 @@ public class YelpService {
         }
 
         return searchResponse;
+    }
+
+    static String urlEncoder( String encode) {
+
+        String encoded = "default";
+
+        try {encoded = URLEncoder.encode(encode,"UTF-8");}
+        catch (UnsupportedEncodingException e) {}
+
+        return encoded;
     }
 }

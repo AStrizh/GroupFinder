@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -25,7 +27,6 @@ public class RestaurantsActivity extends AppCompatActivity {
     @BindView(R.id.locationTextView) TextView restaurantsView;
     private RecyclerView.Adapter adapter;
     private YelpSearchResponse restaurants;
-    private Context activityContext = this;
 
 
     @Override
@@ -36,6 +37,8 @@ public class RestaurantsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         String location = intent.getStringExtra("location");
+        String searchTerm = intent.getStringExtra("searchTerm");
+
         recyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager recyclerViewManager = new LinearLayoutManager(this);
@@ -43,15 +46,15 @@ public class RestaurantsActivity extends AppCompatActivity {
 
         String tempString = restaurantsView.getText().toString() + location;
         restaurantsView.setText(tempString);
-        getRestaurants(location);
+        getRestaurants(searchTerm, location);
     }
 
 
     //Executes a network call to Yelp Fusion API
     //Sets the responses in a recycler view
-    private void getRestaurants(String location) {
+    private void getRestaurants(String searchTerm, String location) {
 
-        YelpService.findRestaurants(location, new Callback() {
+        YelpService.findRestaurants(searchTerm, location, new Callback() {
 
             @Override
             public void onFailure(Call call, IOException e) {
@@ -59,7 +62,7 @@ public class RestaurantsActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Call call, Response response) {
 
                 restaurants = YelpService.processResults(response);
                 RestaurantsActivity.this.runOnUiThread(new Runnable() {
@@ -85,6 +88,22 @@ public class RestaurantsActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void responseChecker(Response response){
+
+        //Log.d("JSON Response", Integer.toString(jsonData.length()));
+        String stringResponse = "";
+        try {stringResponse = response.body().string();}
+        catch (IOException e) {}
+        longLog("JSON Response",stringResponse);
+    }
+
+    private static void longLog(String TAG, String message) {
+        final int chunkSize = 2048;
+        for (int i = 0; i < message.length(); i += chunkSize) {
+            Log.d(TAG, message.substring(i, Math.min(message.length(), i + chunkSize)));
+        }
     }
 
 

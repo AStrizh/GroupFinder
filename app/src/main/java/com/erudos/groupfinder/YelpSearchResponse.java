@@ -5,20 +5,20 @@ import java.util.ArrayList;
 public class YelpSearchResponse {
 
     private int total;
-    private ArrayList<Restaurant> restaurants;
+    private ArrayList<Business> businesses;
     private int offset;
 
 
     YelpSearchResponse (){
         this.total = 0;
-        this.restaurants = null;
+        this.businesses = null;
         this.offset = 0;
     }
 
-    YelpSearchResponse (int total, ArrayList<Restaurant> restaurants){
+    YelpSearchResponse (int total, ArrayList<Business> businesses){
 
         this.total = total;
-        this.restaurants = restaurants;
+        this.businesses = businesses;
         this.offset = 0;
     }
 
@@ -34,7 +34,7 @@ public class YelpSearchResponse {
         return total;
     }
 
-    ArrayList<Restaurant> getRestaurants() {
-        return restaurants;
+    ArrayList<Business> getBusinesses() {
+        return businesses;
     }
 }

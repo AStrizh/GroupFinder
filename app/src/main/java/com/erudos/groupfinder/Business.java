@@ -2,7 +2,7 @@ package com.erudos.groupfinder;
 
 import java.util.ArrayList;
 
-public class Restaurant {
+public class Business {
     private String name;
     private String phone;
     private String website;
@@ -13,9 +13,9 @@ public class Restaurant {
     private double longitude;
     private ArrayList<String> categories;
 
-    Restaurant(String name, String phone, String website,
-                      double rating, String imageUrl, ArrayList<String> address,
-                      double latitude, double longitude, ArrayList<String> categories) {
+    Business(String name, String phone, String website,
+             double rating, String imageUrl, ArrayList<String> address,
+             double latitude, double longitude, ArrayList<String> categories) {
 
         this.name = name;
         this.phone = phone;

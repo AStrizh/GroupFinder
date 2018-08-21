@@ -43,11 +43,17 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             itemLayout = view.findViewById(R.id.itemLayout);
         }
 
-        void bindRestaurant(final Restaurant restaurant) {
-            restaurantNameText.setText(restaurant.getName());
-            restaurantAdressText.setText(restaurant.getAddress().toString());
-            restaurantPhoneText.setText(restaurant.getPhone());
-            Picasso.with(itemView.getContext()).load(restaurant.getImageUrl()).into(restaurantPicture);
+        void bindRestaurant(final Business business) {
+            restaurantNameText.setText(business.getName());
+            restaurantAdressText.setText(business.getAddress().toString());
+            restaurantPhoneText.setText(business.getPhone());
+
+            if (business.getImageUrl().trim().length() == 0){
+                Picasso.with(itemView.getContext()).load(R.drawable.default_image).into(restaurantPicture);
+            }
+            else{
+                Picasso.with(itemView.getContext()).load(business.getImageUrl()).into(restaurantPicture);
+            }
 
             itemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -58,10 +64,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                                    Toast.LENGTH_SHORT).show();
 
                     ArrayList<String> result = new ArrayList<>();
-                    result.add(restaurant.getName());
-                    result.add(restaurant.getAddress().toString());
-                    result.add(restaurant.getPhone());
-                    result.add(restaurant.getImageUrl());
+                    result.add(business.getName());
+                    result.add(business.getAddress().toString());
+                    result.add(business.getPhone());
+                    result.add(business.getImageUrl());
 
                     Intent resultIntent = new Intent();
                     resultIntent.putStringArrayListExtra("result",result);
@@ -93,12 +99,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bindRestaurant(restaurants.getRestaurants().get(position));
+        holder.bindRestaurant(restaurants.getBusinesses().get(position));
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return restaurants.getRestaurants().size();
+        return restaurants.getBusinesses().size();
     }
 }
