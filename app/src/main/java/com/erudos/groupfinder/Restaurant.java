@@ -8,14 +8,15 @@ public class Restaurant {
     private String website;
     private double rating;
     private String imageUrl;
-    private ArrayList<String> address = new ArrayList<>();
+    private ArrayList<String> address;
     private double latitude;
     private double longitude;
-    private ArrayList<String> categories = new ArrayList<>();
+    private ArrayList<String> categories;
 
-    public Restaurant(String name, String phone, String website,
+    Restaurant(String name, String phone, String website,
                       double rating, String imageUrl, ArrayList<String> address,
                       double latitude, double longitude, ArrayList<String> categories) {
+
         this.name = name;
         this.phone = phone;
         this.website = website;
@@ -27,39 +28,39 @@ public class Restaurant {
         this.categories = categories;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public String getPhone() {
+    String getPhone() {
         return phone;
     }
 
-    public String getWebsite() {
+    String getWebsite() {
         return  website;
     }
 
-    public double getRating() {
+    double getRating() {
         return rating;
     }
 
-    public String getImageUrl(){
+    String getImageUrl(){
         return imageUrl;
     }
 
-    public ArrayList<String> getAddress() {
+    ArrayList<String> getAddress() {
         return address;
     }
 
-    public double getLatitude() {
+    double getLatitude() {
         return latitude;
     }
 
-    public double getLongitude() {
+    double getLongitude() {
         return longitude;
     }
 
-    public ArrayList<String> getCategories() {
+    ArrayList<String> getCategories() {
         return categories;
     }
 }

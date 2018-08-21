@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.locationEditText) EditText enteredText;
     @BindView(R.id.resultLayout) LinearLayout resultLayout;
     @BindView(R.id.resultNameTextView) TextView nameView;
-    @BindView(R.id.resultAdressView) TextView adressView;
+    @BindView(R.id.resultAdressView) TextView addressView;
     @BindView(R.id.resultNumberView) TextView numberView;
     @BindView(R.id.resultImageView) ImageView imageView;
 
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         String location = enteredText.getText().toString();
         Intent intent = new Intent(MainActivity.this, RestaurantsActivity.class);
         intent.putExtra("location", location);
-        //startActivity(intent);
+
         startActivityForResult(intent,PICK_RESTAURANT);
     }
 
@@ -56,15 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
                 name = results.get(0);
                 nameView.setText(results.get(0));
-                adressView.setText(results.get(1));
+                addressView.setText(results.get(1));
                 numberView.setText(results.get(2));
                 Picasso.with(this).load(results.get(3)).into(imageView);
 
                 resultLayout.setVisibility(View.VISIBLE);
-                // The user picked a contact.
-                // The Intent's data Uri identifies which contact was selected.
-
-                // Do something with the contact here (bigger example below)
             }
         }
         Toast.makeText(this, name, Toast.LENGTH_SHORT).show();

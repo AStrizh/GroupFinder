@@ -9,32 +9,32 @@ public class YelpSearchResponse {
     private int offset;
 
 
-    public YelpSearchResponse (){
+    YelpSearchResponse (){
         this.total = 0;
         this.restaurants = null;
         this.offset = 0;
     }
 
-    public YelpSearchResponse (int total, ArrayList<Restaurant> restaurants){
+    YelpSearchResponse (int total, ArrayList<Restaurant> restaurants){
 
         this.total = total;
         this.restaurants = restaurants;
         this.offset = 0;
     }
 
-    public int getOffset() {
+    int getOffset() {
         return offset;
     }
 
-    public void setOffset(int offset) {
+    void setOffset(int offset) {
         this.offset = offset;
     }
 
-    public int getTotal() {
+    int getTotal() {
         return total;
     }
 
-    public ArrayList<Restaurant> getRestaurants() {
+    ArrayList<Restaurant> getRestaurants() {
         return restaurants;
     }
 }
