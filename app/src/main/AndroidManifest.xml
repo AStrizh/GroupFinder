@@ -21,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".BusinessListActivity"
             android:parentActivityName=".MainActivity"
@@ -30,6 +29,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.erudos.groupfinder.MainActivity" />
         </activity>
+        <activity
+            android:name=".BusinessViewActivity"
+            android:label="@string/title_activity_business_view"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

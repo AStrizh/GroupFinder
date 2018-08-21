@@ -51,7 +51,7 @@ public class BusinessListActivity extends AppCompatActivity {
     //Sets the responses in a recycler view
     private void getRestaurants(String searchTerm, String location) {
 
-        YelpService.findRestaurants(searchTerm, location, new Callback() {
+        YelpService.findBusinesses(searchTerm, location, new Callback() {
 
             @Override
             public void onFailure(Call call, IOException e) {
@@ -61,7 +61,7 @@ public class BusinessListActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) {
 
-                restaurants = YelpService.processResults(response);
+                restaurants = YelpService.processSearchResults(response);
                 BusinessListActivity.this.runOnUiThread(new Runnable() {
 
                     @Override

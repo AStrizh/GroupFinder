@@ -8,13 +8,6 @@ public class YelpSearchResponse {
     private ArrayList<Business> businesses;
     private int offset;
 
-
-    YelpSearchResponse (){
-        this.total = 0;
-        this.businesses = null;
-        this.offset = 0;
-    }
-
     YelpSearchResponse (int total, ArrayList<Business> businesses){
 
         this.total = total;
