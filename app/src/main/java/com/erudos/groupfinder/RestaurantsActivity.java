@@ -25,7 +25,7 @@ public class RestaurantsActivity extends AppCompatActivity {
     @BindView(R.id.locationTextView) TextView restaurantsView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager recyclerViewManager;
-    private ArrayList<Restaurant> restaurants = new ArrayList<>();
+    private YelpSearchResponse restaurants;
     private Context activityContext = this;
 
 
@@ -43,8 +43,8 @@ public class RestaurantsActivity extends AppCompatActivity {
         // use a linear layout manager
         recyclerViewManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(recyclerViewManager);
-        String tempString = restaurantsView.getText().toString();
-        restaurantsView.setText(tempString + location);
+        String tempString = restaurantsView.getText().toString() + location;
+        restaurantsView.setText(tempString);
         getRestaurants(location);
     }
 
@@ -88,6 +88,14 @@ public class RestaurantsActivity extends AppCompatActivity {
                                 new DividerItemDecoration(
                                         recyclerView.getContext(),
                                         DividerItemDecoration.VERTICAL));
+
+                        String tempString = restaurantsView.getText().toString();
+                        String resultMessege = tempString
+                                + "\n"
+                                + getString(R.string.total)
+                                + restaurants.getTotal();
+
+                        restaurantsView.setText(resultMessege);
 
                     }
                 });

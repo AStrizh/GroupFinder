@@ -21,7 +21,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
 
-    private ArrayList<Restaurant> restaurants;
+    private YelpSearchResponse restaurants;
     private static Context parentContext;
 
     // Provide a reference to the views for each data item
@@ -75,12 +75,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         }
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public RestaurantAdapter(ArrayList<Restaurant> myRestaurants, Context context) {
-        this.restaurants = myRestaurants;
+    public RestaurantAdapter(YelpSearchResponse restaurants, Context context) {
+        this.restaurants = restaurants;
         parentContext = context;
     }
-
 
 
     // Create new views (invoked by the layout manager)
@@ -107,12 +105,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         //holder.holderView.setText(restaurants.get(position));
-        holder.bindRestaurant(restaurants.get(position));
+        holder.bindRestaurant(restaurants.getRestaurants().get(position));
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return restaurants.size();
+        return restaurants.getRestaurants().size();
     }
 }

@@ -1,5 +1,7 @@
 package com.erudos.groupfinder;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,14 +35,23 @@ public class YelpService {
         call.enqueue(callback);
     }
 
-    public ArrayList<Restaurant> processResults(Response response) {
-        ArrayList<Restaurant> restaurants = new ArrayList<>();
+
+    public YelpSearchResponse processResults(Response response) {
+
+        YelpSearchResponse searchResponse = new YelpSearchResponse();
 
         try {
+
+            ArrayList<Restaurant> restaurants = new ArrayList<>();
             String jsonData = response.body().string();
             JSONObject yelpJSON = new JSONObject(jsonData);
+
+            int total = yelpJSON.getInt("total");
             JSONArray businessesJSON = yelpJSON.getJSONArray("businesses");
+
+
             for (int i = 0; i < businessesJSON.length(); i++) {
+
                 JSONObject restaurantJSON = businessesJSON.getJSONObject(i);
                 String name = restaurantJSON.getString("name");
                 String phone = restaurantJSON.optString("display_phone", "Phone not available");
@@ -49,9 +60,9 @@ public class YelpService {
 
                 String imageUrl = restaurantJSON.getString("image_url");
 
-                double latitude = (double) restaurantJSON.getJSONObject("coordinates").getDouble("latitude");
+                double latitude = restaurantJSON.getJSONObject("coordinates").getDouble("latitude");
 
-                double longitude = (double) restaurantJSON.getJSONObject("coordinates").getDouble("longitude");
+                double longitude = restaurantJSON.getJSONObject("coordinates").getDouble("longitude");
 
                 ArrayList<String> address = new ArrayList<>();
                 JSONArray addressJSON = restaurantJSON.getJSONObject("location")
@@ -70,13 +81,69 @@ public class YelpService {
                         imageUrl, address, latitude, longitude, categories);
                 restaurants.add(restaurant);
             }
+
+            searchResponse = new YelpSearchResponse(total,restaurants);
+
         }
         catch (IOException e){
             e.printStackTrace();
         }
+
         catch (JSONException e){
             e.printStackTrace();
         }
-        return restaurants;
+
+        return searchResponse;
     }
+
+
+//    public ArrayList<Restaurant> processResults(Response response) {
+//        ArrayList<Restaurant> restaurants = new ArrayList<>();
+//
+//        try {
+//            String jsonData = response.body().string();
+//            JSONObject yelpJSON = new JSONObject(jsonData);
+//            JSONArray businessesJSON = yelpJSON.getJSONArray("businesses");
+//            for (int i = 0; i < businessesJSON.length(); i++) {
+//
+//                JSONObject restaurantJSON = businessesJSON.getJSONObject(i);
+//                String name = restaurantJSON.getString("name");
+//                String phone = restaurantJSON.optString("display_phone", "Phone not available");
+//                String website = restaurantJSON.getString("url");
+//                double rating = restaurantJSON.getDouble("rating");
+//
+//                String imageUrl = restaurantJSON.getString("image_url");
+//
+//                double latitude = (double) restaurantJSON.getJSONObject("coordinates").getDouble("latitude");
+//
+//                double longitude = (double) restaurantJSON.getJSONObject("coordinates").getDouble("longitude");
+//
+//                ArrayList<String> address = new ArrayList<>();
+//                JSONArray addressJSON = restaurantJSON.getJSONObject("location")
+//                        .getJSONArray("display_address");
+//                for (int y = 0; y < addressJSON.length(); y++) {
+//                    address.add(addressJSON.get(y).toString());
+//                }
+//
+//                ArrayList<String> categories = new ArrayList<>();
+//                JSONArray categoriesJSON = restaurantJSON.getJSONArray("categories");
+//
+//                for (int y = 0; y < categoriesJSON.length(); y++) {
+//                    categories.add(categoriesJSON.getJSONObject(y).getString("title"));
+//                }
+//                Restaurant restaurant = new Restaurant(name, phone, website, rating,
+//                        imageUrl, address, latitude, longitude, categories);
+//                restaurants.add(restaurant);
+//            }
+//        }
+//        catch (IOException e){
+//            e.printStackTrace();
+//        }
+//        catch (JSONException e){
+//            e.printStackTrace();
+//        }
+//        return restaurants;
+//    }
+
+
 }
