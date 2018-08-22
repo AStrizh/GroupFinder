@@ -24,15 +24,21 @@
         <activity
             android:name=".BusinessListActivity"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.erudos.groupfinder.MainActivity" />
         </activity>
         <activity
             android:name=".BusinessViewActivity"
-            android:label="@string/title_activity_business_view"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:parentActivityName=".BusinessListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.erudos.groupfinder.BusinessListActivity" />
+        </activity>
     </application>
 
 </manifest>

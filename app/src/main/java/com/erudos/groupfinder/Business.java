@@ -8,14 +8,14 @@ public class Business {
     private String phone;
     private String website;
     private double rating;
-    String price;
-    int reviewCount;
+    private String price;
+    private int reviewCount;
     private String imageUrl;
     private ArrayList<String> address;
-    ArrayList<String> photos;
+    private ArrayList<String> photos;
     private double latitude;
     private double longitude;
-    Boolean openNow;
+    private Boolean openNow;
 
 
     Business(){}
@@ -78,5 +78,21 @@ public class Business {
 
     double getLongitude() {
         return longitude;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public ArrayList<String> getPhotos() {
+        return photos;
+    }
+
+    public Boolean getOpenNow() {
+        return openNow;
+    }
+
+    public int getReviewCount() {
+        return reviewCount;
     }
 }

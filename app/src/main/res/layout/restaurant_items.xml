@@ -9,6 +9,7 @@
         android:layout_height="100dp"
         android:id="@+id/restaurantImageView"
         android:src="@drawable/default_image"
+        android:contentDescription="Business Picture"
         android:scaleType="centerCrop"/>
 
     <RelativeLayout
