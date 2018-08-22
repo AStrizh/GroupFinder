@@ -74,6 +74,7 @@ public class BusinessListAdapter extends RecyclerView.Adapter<BusinessListAdapte
                     ((BusinessListActivity)itemView.getContext()).setResult(RESULT_OK,resultIntent);
 
                     Intent viewBusinessIntent = new Intent(itemView.getContext(), BusinessViewActivity.class);
+                    viewBusinessIntent.putExtra("id",business.getId());
                     itemView.getContext().startActivity(viewBusinessIntent);
                 }
             });

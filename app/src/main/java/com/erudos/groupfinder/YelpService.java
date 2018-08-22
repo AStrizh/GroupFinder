@@ -1,5 +1,7 @@
 package com.erudos.groupfinder;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,13 +44,9 @@ public class YelpService {
 
         OkHttpClient client = new OkHttpClient.Builder().build();
 
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.YELP_BUSINESS_URL).newBuilder();
-        urlBuilder.addQueryParameter(Constants.ID_QUERY_PARAMETER, id);
-
-        String url = urlBuilder.build().toString();
-
+        String urlString = String.format("%s%s", Constants.YELP_BUSINESS_URL, id);
         Request request= new Request.Builder()
-                .url(url)
+                .url(urlString)
                 .header("Authorization", Constants.YELP_TOKEN)
                 .build();
 
@@ -74,14 +72,14 @@ public class YelpService {
 
             for (int i = 0; i < businessesJSON.length(); i++) {
 
-                JSONObject restaurantJSON = businessesJSON.getJSONObject(i);
-                String id = restaurantJSON.getString("id");
-                String name = restaurantJSON.getString("name");
-                String phone = restaurantJSON.optString("display_phone", "Phone not available");
-                String imageUrl = restaurantJSON.getString("image_url");
+                JSONObject businessJSON = businessesJSON.getJSONObject(i);
+                String id = businessJSON.getString("id");
+                String name = businessJSON.getString("name");
+                String phone = businessJSON.optString("display_phone", "Phone not available");
+                String imageUrl = businessJSON.getString("image_url");
 
                 ArrayList<String> address = new ArrayList<>();
-                JSONArray addressJSON = restaurantJSON.getJSONObject("location")
+                JSONArray addressJSON = businessJSON.getJSONObject("location")
                         .getJSONArray("display_address");
                 for (int y = 0; y < addressJSON.length(); y++) {
                     address.add(addressJSON.get(y).toString());
@@ -105,7 +103,6 @@ public class YelpService {
     static Business processBusinessResult(Response response) {
 
         Business business = null;
-
 
         try {
 

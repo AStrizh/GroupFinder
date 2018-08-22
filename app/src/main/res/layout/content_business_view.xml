@@ -8,4 +8,60 @@
     tools:context=".BusinessViewActivity"
     tools:showIn="@layout/activity_business_view">
 
+    <TextView
+        android:id="@+id/BusinessName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Business Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/businessPhoto"
+        android:layout_width="227dp"
+        android:layout_height="151dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BusinessName"
+        app:srcCompat="@drawable/default_image" />
+
+    <Button
+        android:id="@+id/yelpLaunch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="See on Yelp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/photo1"
+        android:layout_width="160dp"
+        android:layout_height="107dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/businessPhoto"
+        app:srcCompat="@drawable/default_image" />
+
+    <ImageView
+        android:id="@+id/photo2"
+        android:layout_width="160dp"
+        android:layout_height="107dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/businessPhoto"
+        app:srcCompat="@drawable/default_image" />
+
 </android.support.constraint.ConstraintLayout>
