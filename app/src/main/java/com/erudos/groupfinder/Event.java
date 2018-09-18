@@ -7,22 +7,22 @@ import java.util.ArrayList;
 
 class Event {
 
+    private String eventName;
     private String imageURL;
     private String description;
     private String time;
     private String geolocation;
     private String eventLocation;
     private ArrayList<User> usersAttending = new ArrayList<>();
+    private Business businessLocation;
 
 
-    //TODO: Make almost all fields optional
-    Event(String description, String time, String geolocation, String imageURL, String eventLocation){
+    Event(String name, String description, String time, Business business){
 
+        this.eventName = name;
         this.description = description;
         this.time = time;
-        this.geolocation = geolocation;
-        this.imageURL = imageURL;
-        this.eventLocation = eventLocation;
+        this.businessLocation = business;
     }
 
 
@@ -72,5 +72,13 @@ class Event {
 
     void removeUser(User user){
         usersAttending.remove(user);
+    }
+
+    public Business getBusinessLocation() {
+        return businessLocation;
+    }
+
+    public void setBusinessLocation(Business businessLocation) {
+        this.businessLocation = businessLocation;
     }
 }

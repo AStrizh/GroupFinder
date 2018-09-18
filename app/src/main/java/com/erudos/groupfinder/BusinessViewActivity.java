@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,8 +29,17 @@ public class BusinessViewActivity extends AppCompatActivity {
 
     @BindView(R.id.BusinessName) TextView businessName;
     @BindView(R.id.businessPhoto) ImageView businessPhoto;
-    @BindView(R.id.photo1) ImageView photo1;
-    @BindView(R.id.photo2) ImageView photo2;
+
+    @BindView(R.id.eventName)   EditText eventName;
+    @BindView(R.id.eventDateTime)   EditText eventTime;
+    @BindView(R.id.eventShortDescription) EditText eventShortDescription;
+
+    //TODO: Create edit text views to fill in the data
+    //TODO: Date/Time, Event Name, Business ID, Event Short description, Event Long Description
+    //TODO: Decide on a Date/Time class to store event time
+
+
+
     private Business business;
 
     @Override
@@ -51,13 +61,21 @@ public class BusinessViewActivity extends AppCompatActivity {
         startActivity(browserIntent);
     }
 
-    //TODO: Make this a Save Event button
+    //TODO: Save event to SQLite or Android Room DB
     @OnClick(R.id.createEventButton)
     public void onClick(View view) {
 
-        //String location = zipText.getText().toString();
-        //String searchTerm = searchText.getText().toString();
+        String name;
+        String description;
+        String date;
 
+        name = (eventName != null) ? eventName.getText().toString() : "No Event Name";
+        date = (eventTime != null) ? eventTime.getText().toString() : "No Event Date/Time";
+        description = (eventShortDescription != null) ?
+                eventShortDescription.getText().toString() : "No Event Description";
+
+
+        Event newEvent = new Event(name,date,description,business);
 
     }
 
@@ -83,41 +101,16 @@ public class BusinessViewActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        //TODO: See if you can safely delete this
-                        String businessString;
-                        if(business == null){
-                            businessString = "No results Returned";
-                        }
-                        else{
-                            businessString = business.getName() +
-                                    "\n" +
-                                    business.getPhone() +
-                                    "\n" +
-                                    business.getImageUrl() +
-                                    "\n" +
-                                    business.getReviewCount();
-                        }
-
                         businessName.setText(business.getName());
                         Picasso.with(BusinessViewActivity.this)
                                      .load(business.getPhotos()
                                      .get(0))
                                      .into(businessPhoto);
-                        Picasso.with(BusinessViewActivity.this)
-                                     .load(business.getPhotos()
-                                     .get(1))
-                                     .into(photo1);
-                        Picasso.with(BusinessViewActivity.this)
-                                     .load(business.getPhotos()
-                                     .get(2))
-                                     .into(photo2);
 
                     }
                 });
             }
         });
     }
-
-
 
 }
