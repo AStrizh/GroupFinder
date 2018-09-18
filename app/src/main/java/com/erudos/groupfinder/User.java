@@ -10,6 +10,8 @@ class User {
     private ArrayList<Event> previousEvents = new ArrayList<>();
     private ArrayList<Event> attendingEvents = new ArrayList<>();
 
+
+    //TODO: Make almost all fields optional
     User(String realName, String userName){
 
         this.realName = realName;

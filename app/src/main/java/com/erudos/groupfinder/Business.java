@@ -20,6 +20,8 @@ public class Business {
 
     Business(){}
 
+
+    //TODO: Make almost all fields optional
     Business(String id, String name, String phone, String imageUrl, String website, String price, int reviewCount,
              double rating, boolean openNow, ArrayList<String> photos){
 

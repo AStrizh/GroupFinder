@@ -22,6 +22,8 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
+
+//TODO: Turn this into a Create Event activity
 public class BusinessViewActivity extends AppCompatActivity {
 
     @BindView(R.id.BusinessName) TextView businessName;
@@ -43,10 +45,20 @@ public class BusinessViewActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.yelpLaunch)
-    public void onClick(View view) {
+    public void onYelpClick(View view) {
 
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(business.getWebsite()));
         startActivity(browserIntent);
+    }
+
+    //TODO: Make this a Save Event button
+    @OnClick(R.id.createEventButton)
+    public void onClick(View view) {
+
+        //String location = zipText.getText().toString();
+        //String searchTerm = searchText.getText().toString();
+
+
     }
 
 
@@ -71,6 +83,7 @@ public class BusinessViewActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
+                        //TODO: See if you can safely delete this
                         String businessString;
                         if(business == null){
                             businessString = "No results Returned";
@@ -104,5 +117,7 @@ public class BusinessViewActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 }

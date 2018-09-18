@@ -3,6 +3,8 @@ package com.erudos.groupfinder;
 
 import java.util.ArrayList;
 
+
+
 class Event {
 
     private String imageURL;
@@ -12,6 +14,8 @@ class Event {
     private String eventLocation;
     private ArrayList<User> usersAttending = new ArrayList<>();
 
+
+    //TODO: Make almost all fields optional
     Event(String description, String time, String geolocation, String imageURL, String eventLocation){
 
         this.description = description;
