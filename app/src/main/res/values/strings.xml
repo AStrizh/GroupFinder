@@ -2,7 +2,8 @@
     <string name="app_name">GroupFinder</string>
     <string name="action_settings">Settings</string>
 
-    <string name="find_restaurant">Click Here</string>
+    <string name="find_restaurant">Search Businesses</string>
+    <string name="view_events">View Events</string>
     <string name="zip_code">Enter Zip Code</string>
     <string name="search_term">Enter Search Term</string>
     <string name="nearby">Here are all the businesses near:\u0020</string>

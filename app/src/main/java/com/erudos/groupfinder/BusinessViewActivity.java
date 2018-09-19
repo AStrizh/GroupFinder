@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -75,7 +76,7 @@ public class BusinessViewActivity extends AppCompatActivity {
                 eventShortDescription.getText().toString() : "No Event Description";
 
 
-        Event newEvent = new Event(name,date,description,business);
+        Event event = new Event(name,date,description,business);
 
     }
 

@@ -30,6 +30,10 @@ class Event {
         return time;
     }
 
+    public String getEventName() {
+        return eventName;
+    }
+
     void setTime(String time){
         this.time = time;
     }

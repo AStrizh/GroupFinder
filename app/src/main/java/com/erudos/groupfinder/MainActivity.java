@@ -50,6 +50,13 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, PICK_BUSINESS);
     }
 
+    @OnClick(R.id.viewEventsButton)
+    public void onEventClick(View view) {
+
+        Intent intent = new Intent(MainActivity.this, EventListActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         String name = "No Name";

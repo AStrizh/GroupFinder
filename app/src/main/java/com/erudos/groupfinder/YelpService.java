@@ -115,11 +115,6 @@ public class YelpService {
             String phone = businessJSON.optString("phone", "Phone not available");
             String imageUrl = businessJSON.getString("image_url");
             String website = businessJSON.getString("url");
-            String price = businessJSON.getString("price");
-
-            int reviewCount = businessJSON.getInt("review_count");
-            double rating = businessJSON.getDouble("rating");
-            boolean openNow = false; //Figure out how to get the open now value
             ArrayList<String> photos = new ArrayList<>();
 
             JSONArray photosArray = businessJSON.getJSONArray("photos");
@@ -127,8 +122,7 @@ public class YelpService {
                 photos.add(photosArray.get(y).toString());
             }
 
-            business = new Business(id, name, phone, imageUrl, website, price, reviewCount,
-            rating, openNow, photos);
+            business = new Business(id, name, phone, imageUrl, website, photos);
 
         }
         catch (IOException | JSONException e){

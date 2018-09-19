@@ -18,23 +18,23 @@ public class Business {
     private Boolean openNow;
 
 
+    //TODO: Fix initializers to make sense
     Business(){}
 
+    Business(String id){
+        this.id = id;
+    }
 
-    //TODO: Make almost all fields optional
-    Business(String id, String name, String phone, String imageUrl, String website, String price, int reviewCount,
-             double rating, boolean openNow, ArrayList<String> photos){
+
+
+    Business(String id, String name, String phone, String imageUrl, String website, ArrayList<String> photos){
 
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.imageUrl = imageUrl;
         this.website = website;
-        this.price = price;
-        this.reviewCount = reviewCount;
         this.photos = photos;
-        this.openNow = openNow;
-        this.rating = rating;
     }
 
     Business(String id, String name, String phone, String imageUrl, ArrayList<String> address) {
@@ -45,6 +45,8 @@ public class Business {
         this.imageUrl = imageUrl;
         this.address = address;
     }
+
+    //TODO: Create setters
 
     String getId() {
         return id;
